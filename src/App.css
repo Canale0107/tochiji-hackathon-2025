@@ -1,0 +1,13 @@
+.App {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .App {
+    flex-direction: column;
+  }
+}
