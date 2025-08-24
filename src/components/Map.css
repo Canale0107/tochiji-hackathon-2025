@@ -143,3 +143,48 @@
   color: #e91e63;
   font-weight: bold;
 }
+
+/* カスタムマーカーのスタイル */
+.custom-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #007bff;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+  font-size: 16px;
+}
+
+.custom-marker:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 1);
+  border-color: #0056b3;
+}
+
+/* Mapboxポップアップのカスタムスタイル */
+.mapboxgl-popup-content {
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border: none;
+  padding: 0;
+}
+
+.mapboxgl-popup-tip {
+  border-top-color: white;
+}
+
+.mapboxgl-popup-close-button {
+  font-size: 18px;
+  color: #666;
+  right: 8px;
+  top: 8px;
+}
+
+.mapboxgl-popup-close-button:hover {
+  color: #333;
+}
