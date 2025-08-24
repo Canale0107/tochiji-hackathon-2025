@@ -1,0 +1,20 @@
+# Jupyter Lab Environment (minimal setup)
+jupyterlab
+notebook
+
+# Data Analysis - core packages only
+pandas
+numpy
+matplotlib
+seaborn
+plotly
+
+# Machine Learning
+scikit-learn
+
+# Map visualization
+folium
+
+# Utilities
+openpyxl
+ipywidgets

@@ -1,4 +1,4 @@
-import { Post, Event } from "../types";
+import { Post, Event, SmokingArea } from "../types";
 
 // JSONファイルからデータを読み込む関数
 export const loadPosts = async (): Promise<Post[]> => {
@@ -60,5 +60,24 @@ export const saveEvents = async (events: Event[]): Promise<boolean> => {
   } catch (error) {
     console.error("Error saving events:", error);
     return false;
+  }
+};
+
+export const loadSmokingAreas = async (): Promise<SmokingArea[]> => {
+  try {
+    const response = await fetch("/data/smoking-areas.json");
+    if (!response.ok) {
+      throw new Error("Failed to load smoking areas");
+    }
+    const smokingAreas = await response.json();
+
+    // JSONの日付文字列をDateオブジェクトに変換
+    return smokingAreas.map((area: any) => ({
+      ...area,
+      lastUpdated: new Date(area.lastUpdated),
+    }));
+  } catch (error) {
+    console.error("Error loading smoking areas:", error);
+    return [];
   }
 };

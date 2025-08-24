@@ -1,0 +1,154 @@
+.usage-chart {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 16px;
+}
+
+.usage-chart h3 {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  text-align: center;
+}
+
+.chart-container {
+  width: 100%;
+}
+
+.chart-bars {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  height: 200px;
+  padding: 0 8px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #e5e7eb;
+  position: relative;
+}
+
+.bar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  max-width: 30px;
+}
+
+.bar {
+  width: 100%;
+  min-height: 4px;
+  border-radius: 4px 4px 0 0;
+  transition: all 0.3s ease;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.bar:hover {
+  opacity: 0.8;
+  transform: scaleY(1.05);
+}
+
+.bar.current-hour {
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  border: 2px solid #1d4ed8;
+}
+
+.bar-value {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-weight: 600;
+  color: #374151;
+  background: white;
+  padding: 2px 4px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.bar:hover .bar-value,
+.bar.current-hour .bar-value {
+  opacity: 1;
+}
+
+.hour-label {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.chart-legend {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .usage-chart {
+    margin: 12px;
+    padding: 16px;
+  }
+
+  .chart-bars {
+    height: 150px;
+  }
+
+  .bar-container {
+    max-width: 25px;
+  }
+
+  .hour-label {
+    font-size: 10px;
+  }
+
+  .chart-legend {
+    gap: 12px;
+  }
+
+  .legend-item {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-bars {
+    height: 120px;
+    padding: 0 4px;
+  }
+
+  .bar-container {
+    max-width: 20px;
+  }
+
+  .bar-value {
+    font-size: 9px;
+  }
+
+  .hour-label {
+    font-size: 9px;
+  }
+}

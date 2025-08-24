@@ -26,6 +26,27 @@ npm start
 
 ブラウザで `http://localhost:3000` を開いてください。
 
+## 📊 データ分析環境
+
+渋谷区の分煙対策データを分析するための Jupyter Lab 環境も提供しています。
+
+### Jupyter Lab の起動
+
+```bash
+# Python仮想環境を作成・有効化
+python -m venv jupyter_env
+source jupyter_env/bin/activate  # macOS/Linux
+# jupyter_env\Scripts\activate  # Windows
+
+# 必要なパッケージをインストール
+pip install -r requirements.txt
+
+# Jupyter Lab を起動
+jupyter lab
+```
+
+詳細なセットアップ手順は [`jupyter_setup.md`](jupyter_setup.md) を参照してください。
+
 ## 📱 使用方法
 
 ### 投稿の追加
@@ -59,6 +80,7 @@ npm start
 - **地図**: Mapbox GL JS
 - **アイコン**: Lucide React
 - **スタイリング**: CSS3
+- **データ分析**: Jupyter Lab + Python (pandas, matplotlib, plotly)
 
 ## 📝 注意事項
 
