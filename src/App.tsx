@@ -63,7 +63,7 @@ function App() {
         selectedLanguage={selectedLanguage}
         onLanguageChange={setSelectedLanguage}
       />
-      <Map posts={posts} events={events} selectedLanguage={selectedLanguage} />
+      <Map />
     </div>
   );
 }

@@ -4,9 +4,53 @@
   height: 100%;
 }
 
+.map-style-controls {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.style-button {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.style-button:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.style-button.active {
+  background: #007bff;
+  color: white;
+  border-color: #0056b3;
+}
+
 .map {
   width: 100%;
   height: 100%;
+  background: #f0f0f0; /* 地図が読み込まれていない場合の背景色 */
+  border: 2px dashed #ccc; /* 地図コンテナの境界を表示 */
+  min-height: 400px; /* 最小高さを設定 */
+  position: relative; /* 位置を相対に設定 */
+  overflow: hidden; /* オーバーフローを隠す */
+}
+
+/* Mapboxのキャンバス要素のスタイル */
+.map canvas {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .post-marker {
