@@ -173,17 +173,18 @@ const Map: React.FC<MapProps> = ({ posts, events, activeTab }) => {
         const popupContent = `
         <div style="
           padding: 12px; 
-          width: 260px; 
+          width: 240px; 
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
           background: white;
         ">
           <div style="
             font-weight: 600; 
-            font-size: 15px;
+            font-size: 14px;
             color: #2c3e50; 
             margin-bottom: 8px;
             padding-bottom: 6px;
             border-bottom: 1px solid #ecf0f1;
+            word-wrap: break-word;
           ">${event.title}</div>
           
           <div style="
@@ -195,19 +196,19 @@ const Map: React.FC<MapProps> = ({ posts, events, activeTab }) => {
           ">${event.description}</div>
           
           <div style="
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
             margin-bottom: 8px;
             font-size: 12px;
           ">
             <div style="
               color: #7f8c8d;
               font-weight: 500;
+              margin-bottom: 4px;
+              word-wrap: break-word;
             ">
               主催: ${event.organizer}
             </div>
             <div style="
+              display: inline-block;
               color: white; 
               background-color: #ef4444;
               padding: 2px 8px;
@@ -224,18 +225,21 @@ const Map: React.FC<MapProps> = ({ posts, events, activeTab }) => {
             border-top: 1px solid #ecf0f1;
             font-size: 11px;
             color: #7f8c8d;
+            word-wrap: break-word;
+            line-height: 1.3;
           ">
             ${new Date(event.startTime).toLocaleString("ja-JP", {
               month: "short",
               day: "numeric",
               hour: "2-digit",
               minute: "2-digit",
-            })} - ${new Date(event.endTime).toLocaleString("ja-JP", {
-          month: "short",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-        })}
+            })}<br/>
+            〜 ${new Date(event.endTime).toLocaleString("ja-JP", {
+              month: "short",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
           </div>
         </div>
       `;
