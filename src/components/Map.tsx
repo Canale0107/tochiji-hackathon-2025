@@ -1,22 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import mapboxgl from "mapbox-gl";
-import { Post } from "../types";
-import { loadPosts } from "../utils/dataLoader";
+import { Post, Event } from "../types";
 import "./Map.css";
 
-const Map: React.FC = () => {
+interface MapProps {
+  posts: Post[];
+  events: Event[];
+  activeTab: "posts" | "events" | "add";
+}
+
+const Map: React.FC<MapProps> = ({ posts, events, activeTab }) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
-  const [posts, setPosts] = useState<Post[]>([]);
-
-  // 投稿データを読み込み
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const postsData = await loadPosts();
-      setPosts(postsData);
-    };
-    fetchPosts();
-  }, []);
+  const markersRef = useRef<mapboxgl.Marker[]>([]);
 
   useEffect(() => {
     if (!mapContainer.current) return;
@@ -76,22 +72,21 @@ const Map: React.FC = () => {
     };
   }, []);
 
-  // 投稿データが更新されたときにマーカーを追加
-  useEffect(() => {
-    if (!mapRef.current || posts.length === 0) return;
+  // マーカーをクリアする関数
+  const clearMarkers = () => {
+    markersRef.current.forEach((marker) => marker.remove());
+    markersRef.current = [];
+  };
 
-    const map = mapRef.current;
+  // 投稿のマーカーを作成する関数
+  const createPostMarkers = useCallback(
+    (map: mapboxgl.Map) => {
+      posts.forEach((post) => {
+        // 投稿用のシンプルなマーカー（青色）
+        const marker = new mapboxgl.Marker({ color: "#3b82f6" });
 
-    // 既存のマーカーをクリア（マーカーを管理するための配列を作成）
-    const markers: mapboxgl.Marker[] = [];
-
-    // 各投稿に対してマーカーを作成
-    posts.forEach((post) => {
-      // シンプルなマーカーを作成
-      const marker = new mapboxgl.Marker();
-
-      // ポップアップの内容を作成（サイズ調整）
-      const popupContent = `
+        // ポップアップの内容を作成
+        const popupContent = `
         <div style="
           padding: 12px; 
           width: 240px; 
@@ -148,27 +143,143 @@ const Map: React.FC = () => {
         </div>
       `;
 
-      // ポップアップを作成
-      const popup = new mapboxgl.Popup({
-        offset: 25,
-        closeButton: true,
-        closeOnClick: false,
-      }).setHTML(popupContent);
+        // ポップアップを作成
+        const popup = new mapboxgl.Popup({
+          offset: 25,
+          closeButton: true,
+          closeOnClick: false,
+        }).setHTML(popupContent);
 
-      // マーカーを地図に追加
-      marker
-        .setLngLat([post.location.lng, post.location.lat])
-        .setPopup(popup)
-        .addTo(map);
+        // マーカーを地図に追加
+        marker
+          .setLngLat([post.location.lng, post.location.lat])
+          .setPopup(popup)
+          .addTo(map);
 
-      markers.push(marker);
-    });
+        markersRef.current.push(marker);
+      });
+    },
+    [posts]
+  );
 
-    // クリーンアップ関数でマーカーを削除
+  // イベントのマーカーを作成する関数
+  const createEventMarkers = useCallback(
+    (map: mapboxgl.Map) => {
+      events.forEach((event) => {
+        // イベント用のシンプルなマーカー（赤色）
+        const marker = new mapboxgl.Marker({ color: "#ef4444" });
+
+        // イベントのポップアップ内容を作成
+        const popupContent = `
+        <div style="
+          padding: 12px; 
+          width: 260px; 
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          background: white;
+        ">
+          <div style="
+            font-weight: 600; 
+            font-size: 15px;
+            color: #2c3e50; 
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #ecf0f1;
+          ">${event.title}</div>
+          
+          <div style="
+            margin-bottom: 12px; 
+            color: #34495e; 
+            line-height: 1.5;
+            font-size: 13px;
+            word-wrap: break-word;
+          ">${event.description}</div>
+          
+          <div style="
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 12px;
+          ">
+            <div style="
+              color: #7f8c8d;
+              font-weight: 500;
+            ">
+              主催: ${event.organizer}
+            </div>
+            <div style="
+              color: white; 
+              background-color: #ef4444;
+              padding: 2px 8px;
+              border-radius: 12px;
+              font-weight: 600; 
+              font-size: 10px;
+            ">
+              ${event.category}
+            </div>
+          </div>
+          
+          <div style="
+            padding-top: 8px;
+            border-top: 1px solid #ecf0f1;
+            font-size: 11px;
+            color: #7f8c8d;
+          ">
+            ${new Date(event.startTime).toLocaleString("ja-JP", {
+              month: "short",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            })} - ${new Date(event.endTime).toLocaleString("ja-JP", {
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        })}
+          </div>
+        </div>
+      `;
+
+        // ポップアップを作成
+        const popup = new mapboxgl.Popup({
+          offset: 25,
+          closeButton: true,
+          closeOnClick: false,
+        }).setHTML(popupContent);
+
+        // マーカーを地図に追加
+        marker
+          .setLngLat([event.location.lng, event.location.lat])
+          .setPopup(popup)
+          .addTo(map);
+
+        markersRef.current.push(marker);
+      });
+    },
+    [events]
+  );
+
+  // アクティブタブとデータが更新されたときにマーカーを更新
+  useEffect(() => {
+    if (!mapRef.current) return;
+
+    const map = mapRef.current;
+
+    // 既存のマーカーをクリア
+    clearMarkers();
+
+    // アクティブタブに応じてマーカーを作成
+    if (activeTab === "posts" && posts.length > 0) {
+      createPostMarkers(map);
+    } else if (activeTab === "events" && events.length > 0) {
+      createEventMarkers(map);
+    }
+
+    // クリーンアップ関数
     return () => {
-      markers.forEach((marker) => marker.remove());
+      clearMarkers();
     };
-  }, [posts]);
+  }, [posts, events, activeTab]);
 
   return (
     <div className="map-container">

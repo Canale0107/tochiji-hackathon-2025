@@ -12,6 +12,9 @@ function App() {
     "ja" | "en" | "zh" | "ko"
   >("ja");
   const [isLoading, setIsLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<"posts" | "events" | "add">(
+    "posts"
+  );
 
   const addPost = (post: Post) => {
     setPosts((prev) => [post, ...prev]);
@@ -62,8 +65,10 @@ function App() {
         onAddEvent={addEvent}
         selectedLanguage={selectedLanguage}
         onLanguageChange={setSelectedLanguage}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
       />
-      <Map />
+      <Map posts={posts} events={events} activeTab={activeTab} />
     </div>
   );
 }

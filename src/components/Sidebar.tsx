@@ -10,6 +10,8 @@ interface SidebarProps {
   onAddEvent: (event: Event) => void;
   selectedLanguage: "ja" | "en" | "zh" | "ko";
   onLanguageChange: (language: "ja" | "en" | "zh" | "ko") => void;
+  activeTab: "posts" | "events" | "add";
+  onTabChange: (tab: "posts" | "events" | "add") => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -19,11 +21,9 @@ const Sidebar: React.FC<SidebarProps> = ({
   onAddEvent,
   selectedLanguage,
   onLanguageChange,
+  activeTab,
+  onTabChange,
 }) => {
-  const [activeTab, setActiveTab] = useState<"posts" | "events" | "add">(
-    "posts"
-  );
-  const [showAddForm, setShowAddForm] = useState(false);
   const [formType, setFormType] = useState<"post" | "event">("post");
 
   const languages = [
@@ -51,7 +51,6 @@ const Sidebar: React.FC<SidebarProps> = ({
     };
 
     onAddPost(newPost);
-    setShowAddForm(false);
     (e.target as HTMLFormElement).reset();
   };
 
@@ -75,7 +74,6 @@ const Sidebar: React.FC<SidebarProps> = ({
     };
 
     onAddEvent(newEvent);
-    setShowAddForm(false);
     (e.target as HTMLFormElement).reset();
   };
 
@@ -110,21 +108,21 @@ const Sidebar: React.FC<SidebarProps> = ({
       <div className="tab-navigation">
         <button
           className={`tab-button ${activeTab === "posts" ? "active" : ""}`}
-          onClick={() => setActiveTab("posts")}
+          onClick={() => onTabChange("posts")}
         >
           <MessageCircle size={16} />
           投稿
         </button>
         <button
           className={`tab-button ${activeTab === "events" ? "active" : ""}`}
-          onClick={() => setActiveTab("events")}
+          onClick={() => onTabChange("events")}
         >
           <Calendar size={16} />
           イベント
         </button>
         <button
           className={`tab-button ${activeTab === "add" ? "active" : ""}`}
-          onClick={() => setActiveTab("add")}
+          onClick={() => onTabChange("add")}
         >
           <Plus size={16} />
           追加
