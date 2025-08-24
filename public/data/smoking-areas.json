@@ -32,6 +32,50 @@
       { "hour": 21, "averageUsers": 6 },
       { "hour": 22, "averageUsers": 4 }
     ],
+    "weeklyUsage": [
+      {
+        "dayOfWeek": 0,
+        "averageUsers": 8,
+        "peakHour": 12,
+        "congestionLevel": "low"
+      },
+      {
+        "dayOfWeek": 1,
+        "averageUsers": 12,
+        "peakHour": 8,
+        "congestionLevel": "medium"
+      },
+      {
+        "dayOfWeek": 2,
+        "averageUsers": 11,
+        "peakHour": 8,
+        "congestionLevel": "medium"
+      },
+      {
+        "dayOfWeek": 3,
+        "averageUsers": 10,
+        "peakHour": 12,
+        "congestionLevel": "low"
+      },
+      {
+        "dayOfWeek": 4,
+        "averageUsers": 13,
+        "peakHour": 18,
+        "congestionLevel": "medium"
+      },
+      {
+        "dayOfWeek": 5,
+        "averageUsers": 15,
+        "peakHour": 18,
+        "congestionLevel": "high"
+      },
+      {
+        "dayOfWeek": 6,
+        "averageUsers": 9,
+        "peakHour": 14,
+        "congestionLevel": "low"
+      }
+    ],
     "isOpen": true,
     "congestionLevel": "low"
   },
@@ -65,6 +109,50 @@
       { "hour": 20, "averageUsers": 10 },
       { "hour": 21, "averageUsers": 7 },
       { "hour": 22, "averageUsers": 4 }
+    ],
+    "weeklyUsage": [
+      {
+        "dayOfWeek": 0,
+        "averageUsers": 9,
+        "peakHour": 15,
+        "congestionLevel": "medium"
+      },
+      {
+        "dayOfWeek": 1,
+        "averageUsers": 11,
+        "peakHour": 12,
+        "congestionLevel": "high"
+      },
+      {
+        "dayOfWeek": 2,
+        "averageUsers": 10,
+        "peakHour": 12,
+        "congestionLevel": "medium"
+      },
+      {
+        "dayOfWeek": 3,
+        "averageUsers": 9,
+        "peakHour": 13,
+        "congestionLevel": "medium"
+      },
+      {
+        "dayOfWeek": 4,
+        "averageUsers": 12,
+        "peakHour": 19,
+        "congestionLevel": "high"
+      },
+      {
+        "dayOfWeek": 5,
+        "averageUsers": 14,
+        "peakHour": 19,
+        "congestionLevel": "high"
+      },
+      {
+        "dayOfWeek": 6,
+        "averageUsers": 13,
+        "peakHour": 16,
+        "congestionLevel": "high"
+      }
     ],
     "isOpen": true,
     "congestionLevel": "high"
@@ -109,6 +197,50 @@
       { "hour": 22, "averageUsers": 10 },
       { "hour": 23, "averageUsers": 9 }
     ],
+    "weeklyUsage": [
+      {
+        "dayOfWeek": 0,
+        "averageUsers": 12,
+        "peakHour": 18,
+        "congestionLevel": "medium"
+      },
+      {
+        "dayOfWeek": 1,
+        "averageUsers": 16,
+        "peakHour": 18,
+        "congestionLevel": "high"
+      },
+      {
+        "dayOfWeek": 2,
+        "averageUsers": 15,
+        "peakHour": 13,
+        "congestionLevel": "medium"
+      },
+      {
+        "dayOfWeek": 3,
+        "averageUsers": 14,
+        "peakHour": 12,
+        "congestionLevel": "medium"
+      },
+      {
+        "dayOfWeek": 4,
+        "averageUsers": 17,
+        "peakHour": 18,
+        "congestionLevel": "high"
+      },
+      {
+        "dayOfWeek": 5,
+        "averageUsers": 19,
+        "peakHour": 18,
+        "congestionLevel": "high"
+      },
+      {
+        "dayOfWeek": 6,
+        "averageUsers": 16,
+        "peakHour": 19,
+        "congestionLevel": "high"
+      }
+    ],
     "isOpen": true,
     "congestionLevel": "medium"
   },
@@ -143,6 +275,50 @@
       { "hour": 20, "averageUsers": 5 },
       { "hour": 21, "averageUsers": 3 }
     ],
+    "weeklyUsage": [
+      {
+        "dayOfWeek": 0,
+        "averageUsers": 4,
+        "peakHour": 12,
+        "congestionLevel": "low"
+      },
+      {
+        "dayOfWeek": 1,
+        "averageUsers": 6,
+        "peakHour": 12,
+        "congestionLevel": "low"
+      },
+      {
+        "dayOfWeek": 2,
+        "averageUsers": 7,
+        "peakHour": 18,
+        "congestionLevel": "low"
+      },
+      {
+        "dayOfWeek": 3,
+        "averageUsers": 6,
+        "peakHour": 13,
+        "congestionLevel": "low"
+      },
+      {
+        "dayOfWeek": 4,
+        "averageUsers": 8,
+        "peakHour": 18,
+        "congestionLevel": "medium"
+      },
+      {
+        "dayOfWeek": 5,
+        "averageUsers": 9,
+        "peakHour": 18,
+        "congestionLevel": "medium"
+      },
+      {
+        "dayOfWeek": 6,
+        "averageUsers": 5,
+        "peakHour": 14,
+        "congestionLevel": "low"
+      }
+    ],
     "isOpen": true,
     "congestionLevel": "low"
   },
@@ -174,6 +350,50 @@
       { "hour": 18, "averageUsers": 16 },
       { "hour": 19, "averageUsers": 12 },
       { "hour": 20, "averageUsers": 8 }
+    ],
+    "weeklyUsage": [
+      {
+        "dayOfWeek": 0,
+        "averageUsers": 10,
+        "peakHour": 15,
+        "congestionLevel": "medium"
+      },
+      {
+        "dayOfWeek": 1,
+        "averageUsers": 12,
+        "peakHour": 17,
+        "congestionLevel": "medium"
+      },
+      {
+        "dayOfWeek": 2,
+        "averageUsers": 11,
+        "peakHour": 16,
+        "congestionLevel": "medium"
+      },
+      {
+        "dayOfWeek": 3,
+        "averageUsers": 13,
+        "peakHour": 17,
+        "congestionLevel": "medium"
+      },
+      {
+        "dayOfWeek": 4,
+        "averageUsers": 15,
+        "peakHour": 17,
+        "congestionLevel": "high"
+      },
+      {
+        "dayOfWeek": 5,
+        "averageUsers": 17,
+        "peakHour": 17,
+        "congestionLevel": "high"
+      },
+      {
+        "dayOfWeek": 6,
+        "averageUsers": 14,
+        "peakHour": 16,
+        "congestionLevel": "high"
+      }
     ],
     "isOpen": true,
     "congestionLevel": "high"

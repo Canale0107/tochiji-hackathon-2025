@@ -1,4 +1,4 @@
-import { Post, Event, SmokingArea } from "../types";
+import { Post, Event, SmokingArea, CongestionReport } from "../types";
 
 // JSONファイルからデータを読み込む関数
 export const loadPosts = async (): Promise<Post[]> => {
@@ -79,5 +79,39 @@ export const loadSmokingAreas = async (): Promise<SmokingArea[]> => {
   } catch (error) {
     console.error("Error loading smoking areas:", error);
     return [];
+  }
+};
+
+// 混雑度投稿のデータローダー関数
+export const loadCongestionReports = async (): Promise<CongestionReport[]> => {
+  try {
+    const response = await fetch("/data/congestion-reports.json");
+    if (!response.ok) {
+      throw new Error("Failed to load congestion reports");
+    }
+    const reports = await response.json();
+
+    // JSONの日付文字列をDateオブジェクトに変換
+    return reports.map((report: any) => ({
+      ...report,
+      timestamp: new Date(report.timestamp),
+    }));
+  } catch (error) {
+    console.error("Error loading congestion reports:", error);
+    return [];
+  }
+};
+
+// 混雑度投稿を保存する関数
+export const saveCongestionReport = async (
+  report: CongestionReport
+): Promise<boolean> => {
+  try {
+    // 実際の実装では、サーバーサイドのAPIに送信する
+    console.log("Saving congestion report:", report);
+    return true;
+  } catch (error) {
+    console.error("Error saving congestion report:", error);
+    return false;
   }
 };

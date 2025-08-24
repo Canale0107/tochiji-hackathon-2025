@@ -1,17 +1,31 @@
 import React, { useEffect, useRef, useCallback, useState } from "react";
 import mapboxgl from "mapbox-gl";
-import { SmokingArea } from "../types";
+import { SmokingArea, CongestionReport } from "../types";
+import WeeklyChart from "./WeeklyChart";
+import CongestionReportForm from "./CongestionReportForm";
+import CongestionReportsList from "./CongestionReportsList";
 import "./CleanShibuyaMap.css";
 
 interface CleanShibuyaMapProps {
   smokingAreas: SmokingArea[];
+  congestionReports: CongestionReport[];
+  onAddCongestionReport: (report: CongestionReport) => void;
+  selectedLanguage: "ja" | "en" | "zh" | "ko";
 }
 
-const CleanShibuyaMap: React.FC<CleanShibuyaMapProps> = ({ smokingAreas }) => {
+const CleanShibuyaMap: React.FC<CleanShibuyaMapProps> = ({
+  smokingAreas,
+  congestionReports,
+  onAddCongestionReport,
+  selectedLanguage,
+}) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const markersRef = useRef<mapboxgl.Marker[]>([]);
   const [selectedArea, setSelectedArea] = useState<SmokingArea | null>(null);
+  const [showCongestionForm, setShowCongestionForm] = useState<boolean>(false);
+  const [showCongestionReports, setShowCongestionReports] =
+    useState<boolean>(false);
 
   useEffect(() => {
     if (!mapContainer.current) return;
@@ -322,6 +336,20 @@ const CleanShibuyaMap: React.FC<CleanShibuyaMapProps> = ({ smokingAreas }) => {
       <div className="map-header">
         <h1>Clean Shibuya Map</h1>
         <p>喫煙所の位置と混雑状況をリアルタイムで確認できます</p>
+        <div className="header-actions">
+          <button
+            className="action-button"
+            onClick={() => setShowCongestionForm(true)}
+          >
+            🚬 混雑度を投稿
+          </button>
+          <button
+            className="action-button"
+            onClick={() => setShowCongestionReports(!showCongestionReports)}
+          >
+            📊 混雑度一覧
+          </button>
+        </div>
       </div>
 
       <div className="legend">
@@ -365,6 +393,49 @@ const CleanShibuyaMap: React.FC<CleanShibuyaMapProps> = ({ smokingAreas }) => {
             {selectedArea.capacity}人
           </p>
           <p>混雑状況: {getCongestionText(selectedArea.congestionLevel)}</p>
+          <button
+            className="close-details"
+            onClick={() => setSelectedArea(null)}
+          >
+            ×
+          </button>
+        </div>
+      )}
+
+      {selectedArea && (
+        <div className="charts-container">
+          <WeeklyChart smokingArea={selectedArea} />
+        </div>
+      )}
+
+      {/* 混雑度投稿フォーム */}
+      {showCongestionForm && (
+        <CongestionReportForm
+          smokingAreas={smokingAreas}
+          onAddReport={onAddCongestionReport}
+          selectedLanguage={selectedLanguage}
+          onClose={() => setShowCongestionForm(false)}
+        />
+      )}
+
+      {/* 混雑度投稿一覧 */}
+      {showCongestionReports && (
+        <div className="congestion-reports-overlay">
+          <div className="congestion-reports-panel">
+            <div className="panel-header">
+              <h3>🚬 混雑度投稿一覧</h3>
+              <button
+                className="close-panel-button"
+                onClick={() => setShowCongestionReports(false)}
+              >
+                ×
+              </button>
+            </div>
+            <CongestionReportsList
+              reports={congestionReports}
+              selectedLanguage={selectedLanguage}
+            />
+          </div>
         </div>
       )}
     </div>

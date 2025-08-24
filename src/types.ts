@@ -75,6 +75,26 @@ export interface SmokingArea {
     hour: number; // 0-23
     averageUsers: number; // その時間帯の平均使用者数
   }[];
+  weeklyUsage: {
+    dayOfWeek: number; // 0=日曜日, 1=月曜日, ..., 6=土曜日
+    averageUsers: number; // その曜日の平均使用者数
+    peakHour: number; // その曜日の最も混雑する時間帯
+    congestionLevel: "low" | "medium" | "high"; // その曜日の混雑レベル
+  }[];
   isOpen: boolean; // 現在営業中かどうか
   congestionLevel: "low" | "medium" | "high"; // 混雑レベル
+}
+
+export interface CongestionReport {
+  id: string;
+  smokingAreaId: string;
+  smokingAreaName: string;
+  location: Location;
+  congestionLevel: "low" | "medium" | "high";
+  currentUsers: number;
+  capacity: number;
+  timestamp: Date;
+  author: string;
+  comment?: string;
+  language: "ja" | "en" | "zh" | "ko";
 }
